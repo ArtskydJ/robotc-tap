@@ -47,9 +47,11 @@ For a quick and dirty namespace solution, internal global variables and function
 
 This starts a new set of tests, and resets some internal counters. This also ends the previous set of tests, if there was one.
 
+Code:
 ```c
 tTest("my function is awesome");
 ```
+Output:
 ```
 # my function is awesome
 ```
@@ -58,9 +60,11 @@ tTest("my function is awesome");
 
 This checks if `test` is `true`.
 
+Code:
 ```c
 tOk(bLcdBacklight, "the backlight is on");
 ```
+Output:
 ```
 ok 1 the backlight is on
 ```
@@ -69,9 +73,11 @@ ok 1 the backlight is on
 
 This checks if `test` is `false`.
 
+Code:
 ```c
 tNotOk(bLcdBacklight, "the backlight is off");
 ```
+Output:
 ```
 ok 2 the backlight is off
 ```
@@ -80,9 +86,11 @@ ok 2 the backlight is off
 
 This checks if `test` equals `expected`.
 
+Code:
 ```c
 tEqual(motor[MY_MOTOR], 127, "MY_MOTOR is running full speed.");
 ```
+Output:
 ```
 ok 3 MY_MOTOR is running full speed.
 ```
@@ -91,9 +99,11 @@ ok 3 MY_MOTOR is running full speed.
 
 This checks if `test` does not equal `unexpected`.
 
+Code:
 ```c
 tNotEqual(motor[MY_MOTOR2], 0, "MY_MOTOR is not still");
 ```
+Output:
 ```
 ok 4 MY_MOTOR2 is not still
 ```
@@ -102,9 +112,11 @@ ok 4 MY_MOTOR2 is not still
 
 This is a test that always passes.
 
+Code:
 ```c
 tPass("yay this works")
 ```
+Output:
 ```
 ok 5 yay this works
 ```
@@ -113,9 +125,11 @@ ok 5 yay this works
 
 This is a test that always fails.
 
+Code:
 ```c
 tFail("that was predictable")
 ```
+Output:
 ```
 not ok 6 that was predictable
   ---
