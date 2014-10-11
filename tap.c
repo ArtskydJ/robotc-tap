@@ -2,20 +2,19 @@
 //Test Anything Protocal suite
 //Joseph Dykstra
 //2014-10-09
-//Version 1.0.0
+//Version 2.0.0
 
 #define DEF_ASSERT_MSG   "(unnamed assert)"
 #define DEF_TEST_MSG     "(unnamed test)"
 
-int _plan = -1;
 int _on = 0;
 int _pass = 0;
 int _fail = 0;
 int _overallFail = 0;
 int _overallPass = 0;
 int _overallTests = 0;
+int _overallSkipped = 0;
 bool _loggedTapVersion = false;
-
 
 void _logTapVersion() {
 	if (!_loggedTapVersion) {
@@ -39,7 +38,6 @@ void _log(char *message="", int number=-1) {
 	} else {
 		writeDebugStreamLine("");
 	}
-
 }
 
 void _assert(int got, int expected, char *message=DEF_ASSERT_MSG, bool shouldEqual=true) {
@@ -59,27 +57,11 @@ void _assert(int got, int expected, char *message=DEF_ASSERT_MSG, bool shouldEqu
 				expected
 			);
 			_fail++;
+		} else {
+			_overallSkipped++;
 		}
 	} else {
-		_pass += (todo? 2 : (skip? 0 : 1));
-	}
-}
-
-//FUNCTIONS FOR THE USER
-// tTest(msg)
-// tPlan(num)
-// tOk(got, msg)
-// tNotOk(got, msg)
-// tEqual(got, exp, msg)
-// tNotEqual(got, exp, msg)
-// tPass(msg)
-// tFail(msg)
-// tEnd(msg)
-
-void tPlan(int set) {
-	if (_plan == -1) {
-		_plan = set;
-		_logPlan(set);
+		_pass += (skip? 0 : 1);
 	}
 }
 
@@ -107,32 +89,29 @@ void tFail(char *message=DEF_ASSERT_MSG) {
 	_assert(false, true, message);
 }
 
-void _checkPlan() {
-	if (_overallTests > 0) {
-		if (_plan == -1) _logPlan(_on);
-		else if (_on != _plan) tFail("plan does not match number of tests");
-	}
-	_log();
+void _endPreviousTest() {
 	_overallFail += _fail;
 	_overallPass += _pass;
 	_overallTests += _on;
-}
-
-void tTest(char *message=DEF_TEST_MSG) { //=DEF_TEST_MSG
-	_logTapVersion();
-	_checkPlan();
-	_log(message);
-	_plan = -1;
 	_on = 0;
 	_pass = 0;
 	_fail = 0;
 }
 
+void tTest(char *message=DEF_TEST_MSG) { //=DEF_TEST_MSG
+	_endPreviousTest();
+	_logTapVersion();
+	_log(message);
+}
+
 void tEnd() {
-	_checkPlan();
+	_endPreviousTest();
+	_logPlan(_overallTests);
+	_log();
 	if (_overallTests) _log("tests", _overallTests);
 	if (_overallPass) _log("pass", _overallPass);
 	if (_overallFail) _log("fail", _overallFail);
+	if (_overallSkipped) _log("skipped", _overallSkipped);
 	_log();
 	_log(_overallFail? "not ok" : "ok");
 }

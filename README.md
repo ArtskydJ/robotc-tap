@@ -20,30 +20,28 @@ robotc-tap
 
 task main() {
 
-	tTest("the test suite works"); //5 in this set [until the next tTest or tEnd]
-		tPlan(5);
+	tTest("the test suite works");
 		tOk(true);
 		tNotOk(false, "not ok ever!");
 		tEqual(17, 83-66, "83-56=17");
 		tNotEqual(10, 100, "ten ain't a hundred!");
 		tPass("oh yes");
 
-	tTest("this is the second test"); //2 in this set [until the next tTest or tEnd]
+	tTest("this is the second test");
 		tFail("failing # TODO make this not fail");
 		tFail("skipping # SKIP make this skip");
 
-	tTest("the test suite works"); //3 in this set [until the next tTest or tEnd]
-		tPlan(3);
+	tTest("the test suite works");
 		tEqual(17, 17, "17=17");
 		tEqual(10, 10, "ten ain't a hundred!");
 		tPass("such win");
-	tEnd(); //Only run this on the last set
+	tEnd(); //Only run this at the end
 }
 ```
 
 #Functions
 
-For a quick and dirty namespace solution, internal global variables and functions start with `_`, and user functions start with `t` (for test).
+For a quick and dirty namespace solution, internal global variables and functions start with "_", and user functions start with "t" (for test).
 
 ##tTest(string msg)
 
@@ -54,17 +52,6 @@ tTest("my function is awesome");
 ```
 ```
 # my function is awesome
-```
-
-##tPlan(int num)
-
-This sets the goal of how many test functions are going to be run in the following "set". ("Test functions" are the function in this module, not including `tTest()`, `tPlan()`, and `tEnd()`.)
-
-```c
-tPlan(12);
-```
-```
-1..12
 ```
 
 ##tOk(bool test, string message)

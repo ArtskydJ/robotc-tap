@@ -3,7 +3,6 @@
 task main() {
 
 	tTest("the test suite works");
-		tPlan(5); //change the number to comply and stuff
 		tOk(true);
 		tNotOk(false, "not ok ever!");
 		tEqual(17, 83-66, "83-56=17");
@@ -15,7 +14,6 @@ task main() {
 		tFail("skipping # SKIP make this skip");
 
 	tTest("the test suite works");
-		tPlan(3); //change the number to comply and stuff
 		tEqual(17, 17, "17=17");
 		tEqual(10, 10, "ten ain't a hundred!");
 		tPass("such win");
