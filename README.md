@@ -3,7 +3,7 @@ robotc-tap
 
 [Test Anything Protocol](http://testanything.org/tap-version-13-specification.html) for [RobotC](http://robotc.net). Basically a bunch of unit test helper functions, that outputs to the debug stream.
 
-#How To
+# How To
 
 1. Click [Download Zip](https://github.com/ArtskydJ/robotc-tap/archive/master.zip).
 2. Copy the `tap.c` file to the directory that you want to test.
@@ -13,7 +13,7 @@ robotc-tap
 6. Compile and run your unit test file.
 
 
-#Example
+# Example
 
 ```c
 #include "tap.c"
@@ -39,11 +39,11 @@ task main() {
 }
 ```
 
-#Functions
+# Functions
 
 For a quick and dirty namespace solution, internal global variables and functions start with "_", and user functions start with "t" (for test).
 
-##tTest(string msg)
+## `tTest(string msg)`
 
 This starts a new set of tests, and resets some internal counters. This also ends the previous set of tests, if there was one.
 
@@ -56,7 +56,7 @@ Output:
 # my function is awesome
 ```
 
-##tOk(bool test, string message)
+## `tOk(bool test, string message)`
 
 This checks if `test` is `true`.
 
@@ -69,7 +69,7 @@ Output:
 ok 1 the backlight is on
 ```
 
-##tNotOk(bool test, string message)
+## `tNotOk(bool test, string message)`
 
 This checks if `test` is `false`.
 
@@ -82,7 +82,7 @@ Output:
 ok 2 the backlight is off
 ```
 
-##tEqual(int test, int expected, string message)
+## `tEqual(int test, int expected, string message)`
 
 This checks if `test` equals `expected`.
 
@@ -95,7 +95,7 @@ Output:
 ok 3 MY_MOTOR is running full speed.
 ```
 
-##tNotEqual(int test, int unexpected, string message)
+## `tNotEqual(int test, int unexpected, string message)`
 
 This checks if `test` does not equal `unexpected`.
 
@@ -108,7 +108,7 @@ Output:
 ok 4 MY_MOTOR2 is not still
 ```
 
-##tPass(string message)
+## `tPass(string message)`
 
 This is a test that always passes.
 
@@ -121,7 +121,7 @@ Output:
 ok 5 yay this works
 ```
 
-##tFail(string message)
+## `tFail(string message)`
 
 This is a test that always fails.
 
@@ -138,6 +138,11 @@ not ok 6 that was predictable
   ...
 ```
 
-##tEnd(string message)
+## `tEnd(string message)`
 
 This ends the *last* set of tests. Use `tTest()` to end any set that isn't last.
+
+# License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
